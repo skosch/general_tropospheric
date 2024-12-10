@@ -1,0 +1,115 @@
+@font-face {
+    font-family: 'Standard';
+    src: url('webfonts/standard-book-webfont.eot'); /* IE9 Compat Modes */
+    src: url('webfonts/standard-book-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('webfonts/standard-book-webfont.woff2') format('woff2'), /* Modern Browsers */
+         url('webfonts/standard-book-webfont.woff') format('woff'), /* Modern Browsers */
+         url('webfonts/standard-book-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('webfonts/standard-book-webfont.svg#Standard') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Standard';
+    src: url('webfonts/standard-book-italic-webfont.eot'); /* IE9 Compat Modes */
+    src: url('webfonts/standard-book-italic-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('webfonts/standard-book-italic-webfont.woff2') format('woff2'), /* Modern Browsers */
+         url('webfonts/standard-book-italic-webfont.woff') format('woff'), /* Modern Browsers */
+         url('webfonts/standard-book-italic-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('webfonts/standard-book-italic-webfont.svg#Standard') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Standard';
+    src: url('webfonts/standard-bold-webfont.eot'); /* IE9 Compat Modes */
+    src: url('webfonts/standard-bold-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('webfonts/standard-bold-webfont.woff2') format('woff2'), /* Modern Browsers */
+         url('webfonts/standard-bold-webfont.woff') format('woff'), /* Modern Browsers */
+         url('webfonts/standard-bold-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('webfonts/standard-bold-webfont.svg#Standard') format('svg'); /* Legacy iOS */
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Standard';
+    src: url('webfonts/standard-bold-italic-webfont.eot'); /* IE9 Compat Modes */
+    src: url('webfonts/standard-bold-italic-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('webfonts/standard-bold-italic-webfont.woff2') format('woff2'), /* Modern Browsers */
+         url('webfonts/standard-bold-italic-webfont.woff') format('woff'), /* Modern Browsers */
+         url('webfonts/standard-bold-italic-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('webfonts/standard-bold-italic-webfont.svg#Standard') format('svg'); /* Legacy iOS */
+    font-weight: bold;
+    font-style: italic;
+}
+
+body {
+    font-family: "Standard";
+    margin: 0;
+    background: linear-gradient(#93a4e8, #9b88ac, #dda9c4);
+    background-attachment: fixed;
+}
+
+.content {
+    background: white;
+    color: #111;
+    width: calc(100% - 16rem);
+    min-height: calc(100vh - 8rem);
+    margin: 0 auto;
+    padding: 4rem;
+}
+
+.main {
+    font-size: 22pt;
+    max-width: 55ch;
+}
+
+.bulletin {
+    font-size: 16pt;
+    max-width: 55ch;
+}
+
+.top-disclaimers {
+    text-align: center;
+  background: #e4dada;
+  padding: 1rem;
+  margin: 0 -1rem 2rem -1rem;
+  font-size: 12pt;
+  text-transform: uppercase;
+  letter-spacing: 1pt;
+  font-weight: bold;
+  color: #6f4d4b;
+}
+
+.infobox {
+    background: #dedede;
+    margin: 0 -2rem;
+    padding: 2rem;
+}
+
+.bulletin-links {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.bulletin-links li {
+    padding-left: 1em;
+    text-indent: -1em;
+    line-height: 140%;
+}
+.bulletin-links li:before {
+    content: "☉";
+    margin-right: 4pt;
+}
+a {
+    color: #111;
+    text-decoration: underline;
+}
+a:hover {
+    color: #111;
+    text-decoration: none;
+}

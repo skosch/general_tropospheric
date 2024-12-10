@@ -1,0 +1,91 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Color ☉ General Tropospheric</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="content">
+      <div class="bulletin">
+        <p class="top-disclaimers">
+          Status: Investigation ongoing, subject to revisions without notice
+        </p>
+        <h1>Color-separating elements</h1>
+
+        <h2>Separation of light sources</h2>
+        Different lights, different phosphors, different spectra.
+
+        <h2>Rayleigh scattering</h2>
+        <p>
+        Rayleigh scattering, particularly of blue light, requires particles much smaller than the wavelength of the blue light.
+        Sizes well below 100nm are best. Such particles are cheaply available in the form of silica (SiO<sub>2</sub>) or titania (TiO<sub>2</sub>) powder
+        (the latter is somewhat preferable because its scattering is stronger; its refractive index is 2.5 vs silica's 1.45).
+        </p>
+        <p>
+        However, it turns out that in order to create the scattering "window", one must disperse this powder within the "windowpane", i.e. the
+        epoxy or acrylic resin that will cure to form a layer through which the light will shine, and dispersing this powder uniformly
+        is very challenging as the particles tend to form microscopic clumps, which are quite a bit larger than 100nm, give a milky appearance,
+        and Mie-scatter all wavelengths of light (i.e. one makes sunscreen). Instead, monodisperse solutions should be fairly transparent.
+        While some internet posters have reported some success using ultrasonic mixing equipment to break up the agglomerates,
+        this appears to be more effort than it's worth.
+        </p>
+        <p>
+        Many industrial suppliers offer transparent, pre-mixed monodisperse solutions of silica or titania nanoparticles for sale. They usually come in
+        fairly high concentrations (40-50%) and are meant to be used as an additive (at closer to 10%) for resin mixes used in stereolithographic 3D printing
+        and in coatings (e.g. for vehicles or marine applications), the promise being higher material strength, scratch resistance, hydrophobicity, etc.
+        </p>
+        <p>
+        These are not outrageously expensive; tens of dollars for a large bottle. Some examples:
+        </p>
+        <ul>
+          <li><a href="https://nissanchem-usa.com/products/endurasol-nanosilica-particle-monomer-dispersions/">Nissan Chemical Endurasol</a> (silica)</li>
+          <li><a href="https://products.evonik.com/assets/or/ld/NANOPOX_C_620_TDS_DE_DE_TDS_PV_52022511_de_DE_WORLD.pdf">Evonik Nanopox C620</a> (silica)</li>
+          <li><a href="https://www.byk.com/en/products/additive-guide/nanobyk-3650">BYK Nanobyk-3650</a> (silica)</li>
+          <li><a href="https://www.nyacol.com/products/titanium-dioxide/">Nyacol TiSol</a> (titania)</li>
+        </ul>
+
+        <h2>Pre-made Rayleigh scattering panels</h2>
+        <p>
+            The panels used by CoeLux, Yeelight, etc. are presumably manufactured by curing such a monodisperse particle solution in a panel-shaped mold.
+
+            They are available for sale on the Chinese web; look for 板瑞利散射板. The cost depends on the size (tens of dollars for a square meter), but shipping
+            is the more expensive part. Unfortunately, getting them shipped abroad is a major hassle: the websites
+            are entirely in Chinese, the stores are unreliable (I've had to fight for a refund when the store just disappeared after payment) and
+            shipping internationally requires an Alipay account, which can only be recharged with a Chinese bank card (or you'll have to work with middle men).
+        </p>
+
+        <h2>DIY scattering panel or coating</h2>
+        <p>
+          The resins can be purchased and used to create a panel directly (TODO).
+        </p>
+        <p>
+            Alternatively, they can be used to coat a mirror (see <a href="reflective.html">Reflective elements</a>).
+            This results in an optically clear coat which nevertheless exhibits excellent Rayleigh scattering both on the incident and reflected light path.
+        </p>
+
+        <h2>Inkjet printing transparency foil</h2>
+        <p>
+            Available in rolls or letter-sized sheets, they are covered in ultrafine silica powder, which is supposed to help absorb the ink.
+            Internet users claim that waterproof ones are better suited than regular ones. This has been difficult to verify, due to the
+            lack of clarity in branding. (TODO)
+        </p>
+
+        <h2>Other opalescent materials</h2>
+        TODO
+
+        <h2>Dichroic elements</h2>
+        <p>
+        Pros: easily splits blue and yellow elements.
+        Cons: strong angular dependence is strong.
+        TODO: Describe typically available colors (Blaze and Chill) and their color/angle relationship.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

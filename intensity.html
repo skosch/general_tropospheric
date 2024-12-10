@@ -1,0 +1,228 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Intensity ☉ General Tropospheric</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="content">
+      <div class="bulletin">
+        <p class="top-disclaimers">
+          Status: Investigation ongoing, subject to revisions without notice
+        </p>
+        <h1>Intensity requirements</h1>
+        <p class="summary">
+          Bright light is important.
+        </p>
+
+        <h2>Ways to measure intensity</h2>
+        <p>
+          <ul>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Irradiance">Irradiance</a> (Watts per m<sup>2</sup>, &ldquo;flux density&rdquo;). Used to quantify light ray energy hitting some area.
+              There are different versions of this:
+              <ul>
+                <li>Total across all wavelengths</li>
+                <li>Only visible wavelengths (roughly 43% of all incoming energy)</li>
+                <li>Only photosynthetically active wavelengths' radiation (&ldquo;PAR&rdquo;) &ndash; used when selling grow lights</li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Lumen_(unit)">Lumens</a> (&ldquo;luminous flux&rdquo;).
+              The total energy output from one light source, but weighted according to the human sensitivity to each wavelength (<a href="https://en.wikipedia.org/wiki/Luminous_efficacy">luminous efficacy</a>).
+            </li>
+
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Lux_(unit)">Lux</a> (lm per m<sup>2</sup>, &ldquo;luminous flux density&rdquo;).
+              Lumens per area: decreases away from a lamp with the square of the distance. For sunlight, since the sun is so far away,
+              this is basically irradiance, but weighted by human perception.
+            </li>
+          </ul>
+        <p>
+          Total irradiance, on a good day, can be over 1000 W/m<sup>2</sup>. Formula by ChatGPT, not checked for correctness:
+        </p>
+        <p>
+          However, this number isn't very helpful for lighting design. What matters is how much of this actually hits the subject's retina.
+          <ul>
+            <li>From the sun directly, vs. from a diffuse sky, or from scattering off/through clouds</li>
+            <li>What color</li>
+          </ul>
+          For lighting purposes, lux are the right measure. However,
+        </p>
+        <div>
+          <div class="slider-container">
+            <input type="range" id="latitude" min="-90" max="90" value="0">
+            <label for="latitude">Latitude (°): <span id="latitude-value">0</span></label>
+            <select id="latitude-options">
+              <option value="">Select City</option>
+              <option value="51.5074">London</option>
+              <option value="40.7128">New York</option>
+              <option value="35.6895">Tokyo</option>
+              <option value="28.6139">New Delhi</option>
+              <option value="34.0522">Los Angeles</option>
+              <option value="-33.8688">Sydney</option>
+              <option value="55.7558">Moscow</option>
+              <option value="48.8566">Paris</option>
+              <option value="37.7749">San Francisco</option>
+              <option value="-23.5505">São Paulo</option>
+              <option value="-26.2041">Johannesburg</option>
+              <option value="60.1695">Helsinki</option>
+              <option value="-22.9068">Rio de Janeiro</option>
+              <option value="31.2304">Shanghai</option>
+              <option value="1.3521">Singapore</option>
+              <option value="19.0760">Mumbai</option>
+              <option value="35.6895">Seoul</option>
+              <option value="45.5017">Montreal</option>
+              <option value="30.0444">Cairo</option>
+              <option value="41.9028">Rome</option>
+              <option value="-36.8485">Auckland</option>
+              <option value="39.9042">Beijing</option>
+              <option value="49.2827">Vancouver</option>
+              <option value="25.276987">Dubai</option>
+              <option value="64.1355">Reykjavik</option>
+            </select>
+          </div>
+
+          <div class="slider-container">
+            <input type="range" id="day-of-year" min="1" max="365" value="1">
+            <label for="day-of-year">Day of Year: <span id="day-value">1</span></label>
+            <select id="day-options">
+              <option value="">Select Event</option>
+              <option value="79">Spring Equinox (Northern hemisphere)</option>
+              <option value="172">Summer Solstice (Northern hemisphere)</option>
+              <option value="266">Autumn Equinox (Northern hemisphere)</option>
+              <option value="355">Winter Solstice (Northern hemisphere)</option>
+            </select>
+          </div>
+
+          <div class="slider-container">
+            <input type="range" id="transmittance" min="0.5" max="1" step="0.01" value="0.75">
+            <label for="transmittance">Atmospheric Transmittance: <span id="transmittance-value">0.75</span></label>
+            <select id="transmittance-options">
+              <option value="">Select Weather</option>
+              <option value="0.9">Clear Sky</option>
+              <option value="0.7">Few Clouds</option>
+              <option value="0.5">Full Cloud Cover</option>
+              <option value="0.3">Thick Storm Clouds</option>
+            </select>
+          </div>
+
+          <div class="output">
+            Total irradiance: <span id="total-irradiance">-</span> W/m²<br/>
+            Approx. visible irradiance: <span id="visible-irradiance">-</span> W/m²<br/>
+            Approx. lux: <span id="lux">-</span> lux<br/>
+          </div>
+        </div>
+
+        <script>
+          const solarConstant = 1361; // W/m²
+          const visibleFraction = 0.43; // 43% of solar irradiance is in visible light
+          const luminousEfficacy = 120; // lm/W for peak human eye sensitivity
+
+
+          // Function to calculate solar declination
+          function calculateDeclination(dayOfYear) {
+            return 23.44 * Math.sin((2 * Math.PI / 365) * (dayOfYear - 81));
+          }
+
+          // Function to calculate cosine of zenith angle
+          function calculateCosZenith(latitude, declination) {
+            const latRad = latitude * (Math.PI / 180);
+            const declRad = declination * (Math.PI / 180);
+            return Math.sin(latRad) * Math.sin(declRad) + Math.cos(latRad) * Math.cos(declRad);
+          }
+
+          // Function to calculate solar flux
+          function calculateSolarFlux(latitude, dayOfYear, transmittance) {
+            const declination = calculateDeclination(dayOfYear);
+            const cosZenith = calculateCosZenith(latitude, declination);
+            const totalIrradiance = solarConstant * cosZenith * transmittance;
+            const visibleIrradiance = totalIrradiance * visibleFraction;
+            const lux = visibleIrradiance * luminousEfficacy;
+            return {
+              totalIrradiance: cosZenith > 0 ? totalIrradiance.toFixed(2) : 0,
+              visibleIrradiance: cosZenith > 0 ? visibleIrradiance.toFixed(2) : 0,
+              lux: cosZenith > 0 ? lux.toFixed(2) : 0
+            };
+          }
+
+          function updateValues() {
+            const latitude = parseFloat(document.getElementById("latitude").value);
+            const dayOfYear = parseInt(document.getElementById("day-of-year").value, 10);
+            const transmittance = parseFloat(document.getElementById("transmittance").value);
+
+            document.getElementById("latitude-value").textContent = latitude;
+            document.getElementById("day-value").textContent = dayOfYear;
+            document.getElementById("transmittance-value").textContent = transmittance.toFixed(2);
+
+            const { totalIrradiance, visibleIrradiance, lux } = calculateSolarFlux(latitude, dayOfYear, transmittance);
+
+            document.getElementById("total-irradiance").textContent = totalIrradiance;
+            document.getElementById("visible-irradiance").textContent = visibleIrradiance;
+            document.getElementById("lux").textContent = lux;
+          }
+
+          function setLatitude(value) {
+            if (value) document.getElementById("latitude").value = value;
+            updateValues();
+          }
+
+          function setDayOfYear(value) {
+            if (value) document.getElementById("day-of-year").value = value;
+            updateValues();
+          }
+
+          function setTransmittance(value) {
+            if (value) document.getElementById("transmittance").value = value;
+            updateValues();
+          }
+
+          // Attach event listeners
+          document.getElementById("latitude").addEventListener("input", updateValues);
+          document.getElementById("day-of-year").addEventListener("input", updateValues);
+          document.getElementById("transmittance").addEventListener("input", updateValues);
+
+          document.getElementById("latitude-options").addEventListener("change", (e) => setLatitude(e.target.value));
+          document.getElementById("day-options").addEventListener("change", (e) => setDayOfYear(e.target.value));
+          document.getElementById("transmittance-options").addEventListener("change", (e) => setTransmittance(e.target.value));
+
+
+          // Initialize values
+          updateValues();
+        </script>
+        <p>
+
+          However, there is a substantial difference between
+
+
+          Lux from the sun, on a good day, can be ~100,000lx.
+
+          Luminous efficacy depends on the solar altitude.
+
+          https://journals.sagepub.com/doi/abs/10.1177/14771535850170040401 - https://sci-hub.st/10.1177/14771535850170040401
+        </p>
+        <p>
+          Here is how important it is.
+
+          Uniformity / distribution throughout the sky.
+
+          Health effects related to
+        </p>
+        <p>
+          Easy ways to measure:
+          <ul>
+            <li>iOS: Photone app</li>
+            <li>Android: ?</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
